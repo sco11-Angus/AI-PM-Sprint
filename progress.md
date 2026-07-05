@@ -52,5 +52,22 @@ ext dev --webpack，规避当前 Windows 环境下 Turbopack dev server 的 os e
   - init.sh 文件内容是 PowerShell，但扩展名为 .sh；Windows PowerShell 不能直接通过 -File 执行
   - Next 16 Turbopack dev server 在当前环境出现 os error 1450，因此 dev 脚本使用 Webpack
 - 下一步最佳动作：等待用户确认后，进入 feat-002 数据模型设计或 feat-004 Day 1-30 任务系统
+## Session 003
+- 日期：2026-07-05
+- 本轮目标：根据用户提供 UI 设计图重做前端首页
+- 已完成：
+  - 将首页重做为设计图中的显示器场景：线稿背景、黑色显示器边框、玻璃质感屏幕、30 天进度条、AI Knowledge Hub、AI Career Sprint Hub、底部浮动工具栏
+  - 按截图提取近似配色：黑白主结构、浅灰玻璃背景、淡紫/淡绿/淡粉卡片渐变、黑色主按钮
+  - 保持当前 http://localhost:2003 预览服务可访问
+- 运行过的验证：
+  - npm.cmd run lint：通过
+  - npm.cmd run build：通过
+  - Invoke-WebRequest http://localhost:2003：返回 200
+  - 首页内容检查：Welcome, User!、Day 7 of your 30-Day Sprint、AI Career Sprint Hub 均存在
+- 已记录证据：本节记录验证时间 2026-07-05T20:28:07+08:00
+- 提交记录：style: recreate homepage from reference design [verified]
+- 更新过的文件或工件：frontend/app/page.js, frontend/app/globals.css, progress.md
+- 已知风险或未解决问题：该实现按单张截图做视觉还原；没有 Figma 原始尺寸/字体 token，因此像素级误差需要后续基于更多标注继续校准
+- 下一步最佳动作：等待用户确认视觉效果后，再进入下一个功能步骤
 
 
