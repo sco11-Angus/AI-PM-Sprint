@@ -94,14 +94,14 @@
         "id":  "feat-008",
         "name":  "前端首页与导航",
         "priority":  1,
-        "status":  "not_started",
+        "status":  "completed",
         "description":  "Next.js页面布局、导航菜单、样式框架",
         "verification_steps":  [
                                    "Next.js应用成功启动",
                                    "首页可正常访问",
                                    "导航菜单渲染正确"
                                ],
-        "last_verified":  null
+        "last_verified":  "2026-07-05T19:47:50+08:00"
     },
     {
         "id":  "feat-009",
