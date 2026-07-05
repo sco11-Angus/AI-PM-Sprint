@@ -1,11 +1,11 @@
 ﻿# 项目验证会话跟踪记录
 
 ## 全局基础信息
-- 当前已验证状态：feat-001 后端基础架构已完成并验证通过；feat-002 数据模型设计已完成并验证通过；feat-008 前端首页与导航已完成并验证通过
+- 当前已验证状态：feat-001 后端基础架构已完成并验证通过；feat-002 数据模型设计已完成并验证通过；feat-004 Day 1-30 任务系统已完成并验证通过；feat-008 前端首页与导航已完成并验证通过
 - 仓库根目录：E:\VibeCoding
 - 标准启动路径：PowerShell 中执行 init.sh 内容；当前 Windows PowerShell 无法用 -File 直接执行 .sh 扩展名，且本机无 pwsh
 - 标准验证路径：后端导入检查、/api/health smoke test、init.sh 内容执行
-- 当前最高优先级未完成功能：feat-004 Day 1-30 任务系统（priority 2）
+- 当前最高优先级未完成功能：feat-003 用户认证系统（priority 3）或 feat-005 每日技术卡模块（priority 3），MVP 范围建议优先 feat-005
 - 当前 blocker：init.sh 文件内容是 PowerShell，但扩展名为 .sh；Windows PowerShell 不能直接 powershell -File .\init.sh
 
 ## Session 001
@@ -120,5 +120,25 @@ ext dev --webpack，规避当前 Windows 环境下 Turbopack dev server 的 os e
 - 更新过的文件或工件：backend/models/__init__.py, backend/models/daily_content.py, backend/models/day_task.py, backend/models/user_progress.py, backend/database.py, backend/main.py, feature_list.json, progress.md
 - 已知风险或未解决问题：当前模型层使用 Python 标准库 dataclass + sqlite3，尚未引入 SQLAlchemy；适合 MVP，但后续复杂查询可能需要迁移到 ORM
 - 下一步最佳动作：等待用户确认后，进入 feat-004 Day 1-30 任务系统
+## Session 007
+- 日期：2026-07-05
+- 本轮目标：完成 feat-004 Day 1-30 任务系统
+- 已完成：
+  - 新增 backend/services/task_service.py，提供 30 天任务种子数据、任务列表查询、单日任务查询、学习进度更新
+  - 新增 GET /api/tasks，返回 Day 1-30 任务列表
+  - 新增 GET /api/tasks/{day}，返回指定 Day 任务详情，越界返回 404
+  - 新增 PUT /api/progress/{day}，支持 not_started / in_progress / completed 状态更新，completed 自动写 completed_at
+- 运行过的验证：
+  - GET /api/tasks 返回 200 且任务数为 30
+  - GET /api/tasks/7 返回 200 且 day=7
+  - PUT /api/progress/7 返回 200，status=completed，completed_at 存在
+  - GET /api/tasks/31 返回 404
+  - PUT /api/progress/7 传入非法 status 返回 422
+  - init.sh 内容执行：通过
+- 已记录证据：feature_list.json 中 feat-004 status=completed，last_verified=2026-07-05T21:15:38+08:00
+- 提交记录：feat: implement day task API [verified]
+- 更新过的文件或工件：backend/main.py, backend/services/__init__.py, backend/services/task_service.py, feature_list.json, progress.md
+- 已知风险或未解决问题：任务内容目前是 MVP seed 数据，后续可替换为更细的 30 天正式课程内容
+- 下一步最佳动作：等待用户确认后，建议进入 feat-005 每日技术卡模块；feat-003 用户认证不在 PRD 的 MVP 范围内
 
 

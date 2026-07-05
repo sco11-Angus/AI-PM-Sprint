@@ -42,14 +42,14 @@
         "id":  "feat-004",
         "name":  "Day 1-30 任务系统",
         "priority":  2,
-        "status":  "not_started",
+        "status":  "completed",
         "description":  "学习路径模块：每日任务目标、思考、实操、输出",
         "verification_steps":  [
                                    "任务列表API端点工作正常",
                                    "可获取特定Day的任务详情",
                                    "任务进度更新功能正常"
                                ],
-        "last_verified":  null
+        "last_verified":  "2026-07-05T21:15:38+08:00"
     },
     {
         "id":  "feat-005",
