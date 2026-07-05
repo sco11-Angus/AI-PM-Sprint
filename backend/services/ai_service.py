@@ -34,6 +34,33 @@ TECH_CARD_ROTATION = [
     },
 ]
 
+NEWS_ROTATION = [
+    {
+        "title": "AI agents move from chat to workflow execution",
+        "summary": "Teams are packaging models with tools, memory, and evaluation so AI can complete multi-step work instead of only answering questions.",
+        "product_idea": "Build a sprint assistant that turns a learner's daily output into the next concrete project task.",
+        "source": "OpenAI / Google AI / industry reports",
+    },
+    {
+        "title": "Long-context models change knowledge product design",
+        "summary": "Larger context windows make it easier to reason over full documents, interview transcripts, and project notes in one session.",
+        "product_idea": "Create a PM interview workspace that reviews a full project PRD before asking follow-up questions.",
+        "source": "Anthropic / Google AI / Hugging Face",
+    },
+    {
+        "title": "Evaluation becomes a core AI product feature",
+        "summary": "AI products increasingly need visible quality checks, test sets, and feedback loops to earn user trust.",
+        "product_idea": "Add a rubric panel that scores whether a user's AI product answer is specific, testable, and user-centered.",
+        "source": "NeurIPS / ICML / product engineering blogs",
+    },
+    {
+        "title": "Multimodal AI expands product input surfaces",
+        "summary": "Text, image, audio, and screen context can now be combined into richer product workflows.",
+        "product_idea": "Let learners upload screenshots of AI tools and receive PM-style feature teardown prompts.",
+        "source": "OpenAI / Google AI / research updates",
+    },
+]
+
 
 def generate_tech_card(day: int) -> dict[str, Any]:
     card = TECH_CARD_ROTATION[(day - 1) % len(TECH_CARD_ROTATION)]
@@ -45,15 +72,26 @@ def generate_tech_card(day: int) -> dict[str, Any]:
     }
 
 
+def generate_news(day: int) -> dict[str, Any]:
+    news = NEWS_ROTATION[(day - 1) % len(NEWS_ROTATION)]
+    return {
+        "title": news["title"],
+        "summary": news["summary"],
+        "productIdea": news["product_idea"],
+        "source": news["source"],
+    }
+
+
 def generate_daily_content(day: int) -> dict[str, Any]:
     tech_card = generate_tech_card(day)
+    news = generate_news(day)
     return {
         "day": day,
         "tech_concept": tech_card["concept"],
         "tech_one_line": tech_card["oneLine"],
         "tech_principle": tech_card["principle"],
         "tech_example": tech_card["example"],
-        "news_title": f"Day {day} AI Product Signal",
-        "news_summary": "AI tools are moving from single answers toward workflow support.",
-        "news_product_idea": "Design a learning workspace that remembers user goals and retrieves the right context before coaching.",
+        "news_title": news["title"],
+        "news_summary": news["summary"],
+        "news_product_idea": news["productIdea"],
     }

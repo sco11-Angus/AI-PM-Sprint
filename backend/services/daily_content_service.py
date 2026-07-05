@@ -52,3 +52,15 @@ def get_daily_content(day: int) -> dict[str, Any]:
             (cursor.lastrowid,),
         ).fetchone()
     return _row_to_daily_content(row)
+
+
+def get_frontier_insight(day: int) -> dict[str, Any]:
+    daily_content = get_daily_content(day)
+    return {
+        "day": daily_content["day"],
+        "title": daily_content["news_title"],
+        "summary": daily_content["news_summary"],
+        "productIdea": daily_content["news_product_idea"],
+        "cadence": "daily",
+        "delivery": "in_app",
+    }
