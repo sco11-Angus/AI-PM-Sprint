@@ -1,10 +1,8 @@
-const days = Array.from({ length: 30 }, (_, index) => index + 1);
+import Link from "next/link";
 
-const tools = [
-  { icon: "✧", label: "AI Explain" },
-  { icon: "□", label: "AI Ask" },
-  { icon: "◇", label: "Project Build" },
-];
+import { FloatingTools } from "./components/sprint-shell";
+
+const days = Array.from({ length: 30 }, (_, index) => index + 1);
 
 export default function Home() {
   return (
@@ -45,27 +43,30 @@ export default function Home() {
           <article className="glass-panel p-4 md:p-5">
             <h2 className="text-[20px] font-bold">AI Knowledge Hub</h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <div className="soft-card min-h-[150px] p-4">
+              <Link className="soft-card block min-h-[150px] p-4" href="/technical-card">
                 <h3 className="text-[17px] font-bold">Daily Technical Card</h3>
                 <p className="mt-3 text-[13px] font-medium leading-[1.28]">
                   E.g. explaining RAC with key concepts to masline with countries
                   and instractivecs and key concepts.
                 </p>
                 <p className="mt-4 text-[12px] text-[#8b8b8b]">14px/Regular</p>
-              </div>
-              <div className="soft-card min-h-[150px] p-4">
+              </Link>
+              <Link className="soft-card block min-h-[150px] p-4" href="/frontier-insights">
                 <h3 className="text-[17px] font-bold">Frontier Insights</h3>
                 <p className="mt-3 text-[13px] font-medium leading-[1.28]">
                   Summarize the latest AI developments of engineering and under
                   AI matamineat and AI asnts.
                 </p>
                 <p className="mt-4 text-[12px] text-[#8b8b8b]">14px/Regular</p>
-              </div>
+              </Link>
             </div>
             <div className="mt-4 rounded-[12px] bg-white/42 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]">
-              <button className="h-[42px] w-full rounded-[8px] bg-white text-[15px] font-bold shadow-[0_1px_6px_rgba(0,0,0,0.10)]">
+              <Link
+                className="flex h-[42px] w-full items-center justify-center rounded-[8px] bg-white text-[15px] font-bold shadow-[0_1px_6px_rgba(0,0,0,0.10)]"
+                href="/day/7"
+              >
                 Start Day 7 Tasks
-              </button>
+              </Link>
             </div>
           </article>
 
@@ -74,46 +75,48 @@ export default function Home() {
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div className="resume-card min-h-[226px] p-4">
                 <h3 className="text-[17px] font-bold">JD Resume Optimizar</h3>
-                <button className="mt-4 flex h-[50px] w-full items-center justify-center gap-2 rounded-[8px] border border-dashed border-[#d7d9ca] bg-white/35 text-[15px] font-bold">
+                <Link
+                  className="mt-4 flex h-[50px] w-full items-center justify-center gap-2 rounded-[8px] border border-dashed border-[#d7d9ca] bg-white/35 text-[15px] font-bold"
+                  href="/resume-optimizer"
+                >
                   <span className="text-[17px]">↥</span>
                   Upload File
-                </button>
+                </Link>
                 <div className="mt-3 flex h-[52px] items-center rounded-[7px] bg-white px-3 text-[13px] text-[#9a9a9a] shadow-[0_1px_4px_rgba(0,0,0,0.07)]">
                   Paste target JD
                 </div>
-                <button className="mt-4 h-[38px] w-full rounded-[8px] bg-black text-[15px] font-bold text-white">
+                <Link
+                  className="mt-4 flex h-[38px] w-full items-center justify-center rounded-[8px] bg-black text-[15px] font-bold text-white"
+                  href="/resume-optimizer"
+                >
                   Optimize Resume
-                </button>
+                </Link>
               </div>
 
               <div className="interview-card min-h-[226px] p-4">
                 <h3 className="text-[17px] font-bold">AI Mock Interview</h3>
-                <button className="mt-5 h-[36px] w-full rounded-[8px] bg-white/48 px-2 text-[13px] font-black">
+                <Link
+                  className="mt-5 flex h-[36px] w-full items-center justify-center rounded-[8px] bg-white/48 px-2 text-[13px] font-black"
+                  href="/mock-interview"
+                >
                   Analyze Real Interview Qs
-                </button>
+                </Link>
                 <p className="mt-3 text-[13px] font-medium leading-[1.18]">
                   Supports voice/text mode, modes for technical, product, and
                   project-based questions. Promis cutarize detailed feedback.
                 </p>
-                <button className="mt-4 h-[38px] w-full rounded-[8px] bg-black text-[15px] font-bold text-white">
+                <Link
+                  className="mt-4 flex h-[38px] w-full items-center justify-center rounded-[8px] bg-black text-[15px] font-bold text-white"
+                  href="/mock-interview"
+                >
                   Start Mock Interview
-                </button>
+                </Link>
               </div>
             </div>
           </article>
         </section>
 
-        <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-[7px] rounded-[15px] border border-white/65 bg-white/74 px-3 py-2 shadow-[0_4px_16px_rgba(0,0,0,0.19),inset_0_1px_0_rgba(255,255,255,0.95)] backdrop-blur-md">
-          {tools.map((tool) => (
-            <button
-              className="flex h-[36px] items-center gap-[7px] rounded-[10px] bg-white px-3 text-[14px] font-bold shadow-[0_1px_4px_rgba(0,0,0,0.12)]"
-              key={tool.label}
-            >
-              <span>{tool.icon}</span>
-              {tool.label}
-            </button>
-          ))}
-        </div>
+        <FloatingTools />
       </section>
     </main>
   );

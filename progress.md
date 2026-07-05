@@ -85,5 +85,21 @@ ext dev --webpack，规避当前 Windows 环境下 Turbopack dev server 的 os e
 - 更新过的文件或工件：frontend/app/page.js, frontend/app/globals.css, progress.md
 - 已知风险或未解决问题：仍基于截图手工还原，后续如需像素级匹配需继续按用户视觉反馈校准
 - 下一步最佳动作：等待用户确认视觉效果后，再进入下一个功能步骤
+## Session 005
+- 日期：2026-07-05
+- 本轮目标：继续按照当前玻璃拟态风格补齐各个跳转界面
+- 已完成：
+  - 首页入口改为真实链接：Start Day 7 Tasks、Daily Technical Card、Frontier Insights、Resume Optimizer、Mock Interview、AI Explain、AI Ask、Project Build
+  - 新增共享 SprintShell / GlassPanel / FloatingTools 组件，统一页面背景、玻璃面板、底部工具栏和返回入口
+  - 新增页面：/day/7、/technical-card、/frontier-insights、/resume-optimizer、/mock-interview、/ai-explain、/ai-ask、/project-build
+- 运行过的验证：
+  - npm.cmd run lint：通过
+  - npm.cmd run build：通过，Next 生成 12 个静态页面
+  - localhost:2003 路由检查：/、/day/7、/technical-card、/frontier-insights、/resume-optimizer、/mock-interview、/ai-explain、/ai-ask、/project-build 均返回 200
+- 已记录证据：本节记录验证时间 2026-07-05T20:44:27+08:00
+- 提交记录：feat: add glassmorphism navigation pages [verified]
+- 更新过的文件或工件：frontend/app/page.js, frontend/app/components/sprint-shell.js, frontend/app/day/7/page.js, frontend/app/technical-card/page.js, frontend/app/frontier-insights/page.js, frontend/app/resume-optimizer/page.js, frontend/app/mock-interview/page.js, frontend/app/ai-explain/page.js, frontend/app/ai-ask/page.js, frontend/app/project-build/page.js, progress.md
+- 已知风险或未解决问题：页面目前是前端静态交互壳，尚未接后端真实数据或表单提交
+- 下一步最佳动作：等待用户确认视觉和跳转体验后，再进入数据模型或 Day 任务系统
 
 
