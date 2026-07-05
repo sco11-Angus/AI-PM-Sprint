@@ -5,7 +5,7 @@
 - 仓库根目录：E:\VibeCoding
 - 标准启动路径：PowerShell 中执行 init.sh 内容；当前 Windows PowerShell 无法用 -File 直接执行 .sh 扩展名，且本机无 pwsh
 - 标准验证路径：后端导入检查、/api/health smoke test、init.sh 内容执行
-- 当前最高优先级未完成功能：feat-007 AI辅助Q&A系统（priority 4）；feat-003 用户认证不在 MVP 范围内
+- 当前最高优先级未完成功能：feat-009 学习路径展示页面（priority 2）或 feat-011 部署与CI/CD（priority 5）；feat-003 用户认证不在 MVP 范围内
 - 当前 blocker：init.sh 文件内容是 PowerShell，但扩展名为 .sh；Windows PowerShell 不能直接 powershell -File .\init.sh
 
 ## Session 001
@@ -199,5 +199,26 @@ ext dev --webpack，规避当前 Windows 环境下 Turbopack dev server 的 os e
 - 更新过的文件或工件：backend/main.py, backend/services/__init__.py, backend/services/task_service.py, frontend/app/components/sprint-shell.js, frontend/app/page.js, frontend/app/progress/page.js, feature_list.json, progress.md
 - 已知风险或未解决问题：前端 /progress 当前使用静态展示数据；后续可接入 /api/progress 做实时渲染
 - 下一步最佳动作：等待用户确认后，进入 feat-007 AI辅助Q&A系统，继续使用 mock AI
+## Session 011
+- 日期：2026-07-05
+- 本轮目标：接入默认模型 MiniMax M3，并支持通过 API 切换其他模型
+- 已完成：
+  - 新增 backend/config.py，读取环境变量和本地 backend/.env.local
+  - 默认 provider=minimax，model=MiniMax-M3，base_url=https://api.minimax.chat/v1/chat/completions
+  - 新增 backend/services/model_service.py，通过 OpenAI-compatible chat completions 协议调用模型
+  - 新增 GET /api/model-config，返回当前 provider/model/base_url/has_api_key，不暴露密钥
+  - 新增 PUT /api/model-config，支持运行时切换 provider、model、base_url、api_key_env，并可传入 api_key
+  - 新增 POST /api/ai/ask，调用当前模型回答问题
+  - 新增 backend/.env.example；本地 backend/.env.local 已写入用户提供的 MiniMax key，但被 .gitignore 忽略，不提交
+- 运行过的验证：
+  - GET /api/model-config 返回 minimax、MiniMax-M3、https://api.minimax.chat/v1/chat/completions、has_api_key=True
+  - PUT /api/model-config 可切换到 custom-openai-compatible/custom-model/example base_url
+  - POST /api/ai/ask 使用 MiniMax M3 真实联网调用返回 200，answer 非空
+  - init.sh 内容执行：通过
+- 已记录证据：feature_list.json 中 feat-007 status=completed，last_verified=2026-07-05T21:44:46+08:00
+- 提交记录：feat: integrate minimax model gateway [verified]
+- 更新过的文件或工件：.gitignore, backend/.env.example, backend/config.py, backend/main.py, backend/services/__init__.py, backend/services/model_service.py, feature_list.json, progress.md；backend/.env.local 为本地密钥文件，不提交
+- 已知风险或未解决问题：MiniMax 返回内容可能包含模型推理标记；后续如影响前端展示，可在响应层做清洗
+- 下一步最佳动作：等待用户确认后，进入 feat-009 学习路径展示页面或 MVP 收尾
 
 

@@ -81,14 +81,14 @@
         "id":  "feat-007",
         "name":  "AI辅助Q\u0026A系统",
         "priority":  4,
-        "status":  "not_started",
+        "status":  "completed",
         "description":  "AI解释概念、回答问题、学习辅助",
         "verification_steps":  [
                                    "问答接口连接正常",
                                    "OpenAI API调用成功",
                                    "回复内容质量验证通过"
                                ],
-        "last_verified":  null
+        "last_verified":  "2026-07-05T21:44:46+08:00"
     },
     {
         "id":  "feat-008",

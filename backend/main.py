@@ -5,8 +5,11 @@ from pydantic import BaseModel
 
 from database import check_connection, initialize_database
 from services import (
+    ask_model,
+    configure_model,
     get_daily_content,
     get_frontier_insight,
+    get_public_model_config,
     get_progress_summary,
     get_task,
     list_tasks,
@@ -19,6 +22,19 @@ app = FastAPI(title="AI PM Sprint API")
 class ProgressUpdate(BaseModel):
     status: Literal["not_started", "in_progress", "completed"]
     user_output: str | None = None
+
+
+class ModelConfigUpdate(BaseModel):
+    provider: str | None = None
+    model: str | None = None
+    base_url: str | None = None
+    api_key: str | None = None
+    api_key_env: str | None = None
+
+
+class AskRequest(BaseModel):
+    question: str
+    context: str | None = None
 
 
 @app.on_event("startup")
@@ -71,6 +87,30 @@ def get_frontier_by_day(day: int):
 @app.get("/api/progress")
 def get_progress():
     return get_progress_summary()
+
+
+@app.get("/api/model-config")
+def get_model_configuration():
+    return get_public_model_config()
+
+
+@app.put("/api/model-config")
+def put_model_configuration(payload: ModelConfigUpdate):
+    return configure_model(
+        provider=payload.provider,
+        model=payload.model,
+        base_url=payload.base_url,
+        api_key=payload.api_key,
+        api_key_env=payload.api_key_env,
+    )
+
+
+@app.post("/api/ai/ask")
+def post_ai_ask(payload: AskRequest):
+    try:
+        return ask_model(payload.question, payload.context)
+    except RuntimeError as error:
+        raise HTTPException(status_code=502, detail=str(error)) from error
 
 
 @app.put("/api/progress/{day}")
