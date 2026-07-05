@@ -12,6 +12,7 @@
 - 帮助用户建立AI认知 + 产品能力
 - 引导用户完成一个AI项目
 - 提供AI辅助学习（解释 / 点评 / 训练）
+- 帮忙修改简历/模拟面试
 
 项目采用"内容驱动 + AI增强"的设计理念。
 
@@ -52,7 +53,7 @@ ai-pm-sprint/
 ### 1️⃣ 克隆项目
 
 ```bash
-git clone <your-repo>
+git clone [<your-repo>](https://github.com/sco11-Angus/AI-PM-Sprint)
 cd ai-pm-sprint
 ```
 
