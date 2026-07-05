@@ -1,0 +1,145 @@
+﻿[
+    {
+        "id":  "feat-001",
+        "name":  "后端基础架构",
+        "priority":  1,
+        "status":  "completed",
+        "description":  "FastAPI服务启动、路由配置、数据库连接",
+        "verification_steps":  [
+                                   "FastAPI应用成功启动",
+                                   "可访问/api/health端点",
+                                   "数据库连接正常"
+                               ],
+        "last_verified":  "2026-07-05T00:00:00+08:00"
+    },
+    {
+        "id":  "feat-002",
+        "name":  "数据模型设计",
+        "priority":  2,
+        "status":  "not_started",
+        "description":  "用户、任务、学习进度等核心数据模型定义",
+        "verification_steps":  [
+                                   "数据模型定义完成",
+                                   "数据库表结构创建",
+                                   "模型对象序列化/反序列化测试通过"
+                               ],
+        "last_verified":  null
+    },
+    {
+        "id":  "feat-003",
+        "name":  "用户认证系统",
+        "priority":  3,
+        "status":  "not_started",
+        "description":  "用户注册、登录、JWT令牌管理",
+        "verification_steps":  [
+                                   "用户注册端点功能正常",
+                                   "用户登录返回有效令牌",
+                                   "令牌验证中间件工作正常"
+                               ],
+        "last_verified":  null
+    },
+    {
+        "id":  "feat-004",
+        "name":  "Day 1-30 任务系统",
+        "priority":  2,
+        "status":  "not_started",
+        "description":  "学习路径模块：每日任务目标、思考、实操、输出",
+        "verification_steps":  [
+                                   "任务列表API端点工作正常",
+                                   "可获取特定Day的任务详情",
+                                   "任务进度更新功能正常"
+                               ],
+        "last_verified":  null
+    },
+    {
+        "id":  "feat-005",
+        "name":  "每日技术卡模块",
+        "priority":  3,
+        "status":  "not_started",
+        "description":  "AI输入系统模块1：概念解释、原理、实操、输出",
+        "verification_steps":  [
+                                   "技术卡内容可正常获取",
+                                   "与AI服务集成测试通过",
+                                   "一句话讲解生成成功"
+                               ],
+        "last_verified":  null
+    },
+    {
+        "id":  "feat-006",
+        "name":  "前沿速递模块",
+        "priority":  3,
+        "status":  "not_started",
+        "description":  "AI输入系统模块2：每日行业前沿信息推送",
+        "verification_steps":  [
+                                   "前沿信息采集流程工作",
+                                   "产品机会点生成成功",
+                                   "推送机制验证通过"
+                               ],
+        "last_verified":  null
+    },
+    {
+        "id":  "feat-007",
+        "name":  "AI辅助Q\u0026A系统",
+        "priority":  4,
+        "status":  "not_started",
+        "description":  "AI解释概念、回答问题、学习辅助",
+        "verification_steps":  [
+                                   "问答接口连接正常",
+                                   "OpenAI API调用成功",
+                                   "回复内容质量验证通过"
+                               ],
+        "last_verified":  null
+    },
+    {
+        "id":  "feat-008",
+        "name":  "前端首页与导航",
+        "priority":  1,
+        "status":  "not_started",
+        "description":  "Next.js页面布局、导航菜单、样式框架",
+        "verification_steps":  [
+                                   "Next.js应用成功启动",
+                                   "首页可正常访问",
+                                   "导航菜单渲染正确"
+                               ],
+        "last_verified":  null
+    },
+    {
+        "id":  "feat-009",
+        "name":  "学习路径展示页面",
+        "priority":  2,
+        "status":  "not_started",
+        "description":  "前端展示Day 1-30任务列表和详情",
+        "verification_steps":  [
+                                   "任务列表页面加载正常",
+                                   "可查看单个任务详情",
+                                   "与后端API集成测试通过"
+                               ],
+        "last_verified":  null
+    },
+    {
+        "id":  "feat-010",
+        "name":  "学习进度追踪",
+        "priority":  3,
+        "status":  "not_started",
+        "description":  "用户学习进度统计、可视化展示",
+        "verification_steps":  [
+                                   "进度统计API工作正常",
+                                   "前端可视化组件渲染正确",
+                                   "进度数据实时更新验证"
+                               ],
+        "last_verified":  null
+    },
+    {
+        "id":  "feat-011",
+        "name":  "部署与CI/CD",
+        "priority":  5,
+        "status":  "not_started",
+        "description":  "生产部署配置、自动化测试流程",
+        "verification_steps":  [
+                                   "前后端构建成功",
+                                   "部署脚本可执行",
+                                   "端到端测试通过"
+                               ],
+        "last_verified":  null
+    }
+]
