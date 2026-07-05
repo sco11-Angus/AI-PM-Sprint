@@ -1,0 +1,25 @@
+# Render Blueprint — AI PM Sprint backend service
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: ai-pm-sprint-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: AI_PROVIDER
+        value: minimax
+      - key: AI_MODEL
+        value: MiniMax-M3
+      - key: AI_BASE_URL
+        value: https://api.minimax.chat/v1/chat/completions
+      - key: AI_API_KEY_ENV
+        value: MINIMAX_API_KEY
+      - key: MINIMAX_API_KEY
+        sync: false  # Set manually in Render dashboard
+      - key: PYTHON_VERSION
+        value: "3.12"
+    healthCheckPath: /api/health
+    autoDeploy: true

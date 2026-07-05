@@ -25,7 +25,7 @@
 
 ### 后端
 - FastAPI（Python）
-- SQLite（本地数据库，后续可迁移Supabase）
+- MySQL（本地数据库，后续可迁移Supabase）
 
 ### AI能力
 - OpenAI API（或其他大模型）
@@ -65,7 +65,7 @@ npm run dev
 ```
 
 访问：
-👉 http://localhost:3000
+👉 http://localhost:2000
 
 ### 3️⃣ 启动后端
 
@@ -76,7 +76,7 @@ uvicorn main:app --reload
 ```
 
 访问：
-👉 http://localhost:8000
+👉 http://localhost:9000
 
 ### 4️⃣ 配置环境变量（可选）
 

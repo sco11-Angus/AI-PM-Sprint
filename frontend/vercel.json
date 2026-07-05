@@ -1,0 +1,12 @@
+# Vercel frontend deployment config
+# Docs: https://vercel.com/docs/projects/project-configuration
+
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm ci",
+  "outputDirectory": ".next",
+  "crons": []
+}

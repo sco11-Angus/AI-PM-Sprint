@@ -1,0 +1,95 @@
+# ============================================================
+# PR Check: Code Quality & Preview Summary
+# ============================================================
+# Runs on every pull request. Provides a quick quality gate
+# before CI runs the full build/test suite.
+# ============================================================
+
+name: PR Check
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: pr-check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  quality-gate:
+    name: Quality Gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      # --- Backend checks ---
+      - name: Check Python syntax
+        run: |
+          echo "Checking Python files for syntax errors..."
+          find backend -name "*.py" -not -path "*/__pycache__/*" | while read f; do
+            python -m py_compile "$f" || exit 1
+          done
+          echo "All Python files passed syntax check."
+
+      - name: Check requirements.txt exists
+        run: |
+          if [ ! -f "backend/requirements.txt" ]; then
+            echo "::error::backend/requirements.txt is missing"
+            exit 1
+          fi
+          echo "requirements.txt found."
+
+      - name: Install backend deps and verify import
+        run: |
+          pip install -r backend/requirements.txt
+          cd backend
+          python -c "from main import app; print('FastAPI app imports OK')"
+
+      # --- Frontend checks ---
+      - name: Install frontend deps
+        working-directory: frontend
+        run: npm ci
+
+      - name: Check package.json validity
+        working-directory: frontend
+        run: |
+          node -e "
+          const pkg = require('./package.json');
+          const required = ['name', 'scripts.build', 'scripts.dev', 'scripts.lint'];
+          for (const path of required) {
+            const parts = path.split('.');
+            let val = pkg;
+            for (const p of parts) { val = val?.[p]; }
+            if (!val) { console.error('Missing:', path); process.exit(1); }
+          }
+          console.log('package.json valid');
+          "
+
+      - name: ESLint
+        working-directory: frontend
+        run: npm run lint
+
+      # --- Summary ---
+      - name: PR Summary
+        if: always()
+        run: |
+          echo "## PR Quality Check Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Python syntax | ${{ job.status == 'success' && 'Pass' || 'Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Backend import | ${{ job.status == 'success' && 'Pass' || 'Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Frontend ESLint | ${{ job.status == 'success' && 'Pass' || 'Fail' }} |" >> $GITHUB_STEP_SUMMARY
