@@ -1,11 +1,11 @@
 ﻿# 项目验证会话跟踪记录
 
 ## 全局基础信息
-- 当前已验证状态：feat-001 后端基础架构已完成并验证通过；feat-002 数据模型设计已完成并验证通过；feat-004 Day 1-30 任务系统已完成并验证通过；feat-008 前端首页与导航已完成并验证通过
+- 当前已验证状态：MVP 主要功能已完成并验证通过：feat-001、feat-002、feat-004、feat-005、feat-006、feat-007、feat-008、feat-009、feat-010、feat-011
 - 仓库根目录：E:\VibeCoding
 - 标准启动路径：PowerShell 中执行 init.sh 内容；当前 Windows PowerShell 无法用 -File 直接执行 .sh 扩展名，且本机无 pwsh
 - 标准验证路径：后端导入检查、/api/health smoke test、init.sh 内容执行
-- 当前最高优先级未完成功能：feat-011 部署与CI/CD（priority 5）；feat-003 用户认证不在 MVP 范围内
+- 当前最高优先级未完成功能：无 MVP 功能剩余；feat-003 用户认证不在 MVP 范围内，保持 not_started
 - 当前 blocker：init.sh 文件内容是 PowerShell，但扩展名为 .sh；Windows PowerShell 不能直接 powershell -File .\init.sh
 
 ## Session 001
@@ -244,5 +244,29 @@ ext dev --webpack，规避当前 Windows 环境下 Turbopack dev server 的 os e
 - 更新过的文件或工件：backend/main.py, frontend/app/learning-path/page.js, frontend/app/day/[day]/page.js, frontend/app/day/7/page.js, frontend/app/components/sprint-shell.js, frontend/app/page.js, feature_list.json, progress.md
 - 已知风险或未解决问题：/learning-path 为客户端 fetch；如后端 9000 未启动，会显示错误状态。当前已启动 backend-preview-9000 供本地预览
 - 下一步最佳动作：等待用户确认后，进入 MVP 收尾或部署与 CI/CD
-
+## Session 013
+- 日期：2026-07-05
+- 本轮目标：完成 feat-011 部署与CI/CD
+- 已完成：
+  - 新增 backend/requirements.txt，锁定 FastAPI 后端运行依赖
+  - 新增 scripts/verify.ps1，统一执行后端 smoke、前端 lint、前端 build、init 检查
+  - 新增 scripts/start-local.ps1 和 scripts/stop-local.ps1，作为本地部署/预览启动停止脚本
+  - 新增 .github/workflows/ci.yml，定义 GitHub Actions CI：安装 Python/Node 依赖并运行 verify.ps1
+  - 新增 DEPLOYMENT.md，记录本地预览、环境变量、验证和生产部署方向
+  - 更新 init.sh，使依赖检查匹配当前实现：fastapi + uvicorn，不再误查 sqlalchemy
+  - 纳入前端构建必需配置和 lockfile，保证干净 checkout 能安装和构建
+- 运行过的验证：
+  - powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1：通过
+  - 后端 smoke：/api/health、/api/tasks、/api/daily/7、/api/frontier/7、/api/progress 均通过
+  - npm.cmd run lint：通过
+  - npm.cmd run build：通过
+  - init.sh 内容执行：通过，关键 Python 依赖 fastapi/uvicorn 检查通过
+  - scripts/stop-local.ps1 + scripts/start-local.ps1 可执行
+  - http://localhost:9000/api/health 返回 200
+  - http://localhost:2003 返回 200
+- 已记录证据：feature_list.json 中 feat-011 status=completed，last_verified=2026-07-05T22:09:29+08:00
+- 提交记录：feat: add deployment verification workflow [verified]
+- 更新过的文件或工件：backend/requirements.txt, scripts/verify.ps1, scripts/start-local.ps1, scripts/stop-local.ps1, .github/workflows/ci.yml, DEPLOYMENT.md, init.sh, frontend build config/lockfile, feature_list.json, progress.md
+- 已知风险或未解决问题：真实云部署尚未执行；当前是可重复本地部署脚本和 CI 配置。feat-003 用户认证仍未开始，因为 PRD 明确不在 MVP 范围内
+- 下一步最佳动作：进行 MVP 总体验收、清理文档不一致项，或准备真实部署环境
 

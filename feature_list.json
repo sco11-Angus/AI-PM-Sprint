@@ -133,13 +133,13 @@
         "id":  "feat-011",
         "name":  "部署与CI/CD",
         "priority":  5,
-        "status":  "not_started",
+        "status":  "completed",
         "description":  "生产部署配置、自动化测试流程",
         "verification_steps":  [
                                    "前后端构建成功",
                                    "部署脚本可执行",
                                    "端到端测试通过"
                                ],
-        "last_verified":  null
+        "last_verified":  "2026-07-05T22:09:29+08:00"
     }
 ]
