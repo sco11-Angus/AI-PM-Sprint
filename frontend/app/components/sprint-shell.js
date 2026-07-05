@@ -4,6 +4,7 @@ export const toolLinks = [
   { icon: "✧", label: "AI Explain", href: "/ai-explain" },
   { icon: "□", label: "AI Ask", href: "/ai-ask" },
   { icon: "◇", label: "Project Build", href: "/project-build" },
+  { icon: "◐", label: "Progress", href: "/progress" },
 ];
 
 export function SprintShell({ children, eyebrow, title, subtitle }) {

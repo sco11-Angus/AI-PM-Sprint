@@ -116,6 +116,15 @@ export default function Home() {
           </article>
         </section>
 
+        <div className="mt-6 rounded-[12px] bg-white/42 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)]">
+          <Link
+            className="flex h-[42px] w-full items-center justify-center rounded-[8px] bg-white text-[15px] font-bold shadow-[0_1px_6px_rgba(0,0,0,0.10)]"
+            href="/progress"
+          >
+            View Sprint Progress
+          </Link>
+        </div>
+
         <FloatingTools />
       </section>
     </main>

@@ -5,7 +5,7 @@
 - 仓库根目录：E:\VibeCoding
 - 标准启动路径：PowerShell 中执行 init.sh 内容；当前 Windows PowerShell 无法用 -File 直接执行 .sh 扩展名，且本机无 pwsh
 - 标准验证路径：后端导入检查、/api/health smoke test、init.sh 内容执行
-- 当前最高优先级未完成功能：feat-003 用户认证系统（priority 3）或 feat-010 学习进度追踪（priority 3）；MVP 范围建议优先 feat-010，跳过 feat-003
+- 当前最高优先级未完成功能：feat-007 AI辅助Q&A系统（priority 4）；feat-003 用户认证不在 MVP 范围内
 - 当前 blocker：init.sh 文件内容是 PowerShell，但扩展名为 .sh；Windows PowerShell 不能直接 powershell -File .\init.sh
 
 ## Session 001
@@ -179,5 +179,25 @@ ext dev --webpack，规避当前 Windows 环境下 Turbopack dev server 的 os e
 - 更新过的文件或工件：backend/main.py, backend/services/__init__.py, backend/services/ai_service.py, backend/services/daily_content_service.py, feature_list.json, progress.md
 - 已知风险或未解决问题：当前前沿速递为 mock，不抓取真实 NeurIPS/ICML/OpenAI 等外部来源；MVP 阶段先保证产品结构与接口闭环
 - 下一步最佳动作：等待用户确认后，建议进入 feat-010 学习进度追踪；feat-003 用户认证不在 PRD 的 MVP 范围内
+## Session 010
+- 日期：2026-07-05
+- 本轮目标：完成 feat-010 学习进度追踪
+- 已完成：
+  - 后端新增 get_progress_summary，统计 totalDays、completedDays、inProgressDays、completionRate、currentDay、latestOutput、items
+  - 新增 GET /api/progress，返回学习进度统计
+  - 前端新增 /progress 页面，沿用玻璃拟态风格展示进度快照、完成率进度条、30-Day Map 和下一步行动
+  - 首页和底部工具栏新增 Progress 入口
+- 运行过的验证：
+  - PUT /api/progress/3 设置 completed 后，GET /api/progress 返回 totalDays=30、completedDays>=1、completionRate>0
+  - PUT /api/progress/4 设置 in_progress 后，GET /api/progress 返回 inProgressDays>=1
+  - npm.cmd run lint：通过
+  - npm.cmd run build：通过，Next 生成 /progress 页面
+  - Invoke-WebRequest http://localhost:2003/progress 返回 200，包含 Sprint Progress Tracker 和 30-Day Map
+  - init.sh 内容执行：通过
+- 已记录证据：feature_list.json 中 feat-010 status=completed，last_verified=2026-07-05T21:27:35+08:00
+- 提交记录：feat: add learning progress tracking [verified]
+- 更新过的文件或工件：backend/main.py, backend/services/__init__.py, backend/services/task_service.py, frontend/app/components/sprint-shell.js, frontend/app/page.js, frontend/app/progress/page.js, feature_list.json, progress.md
+- 已知风险或未解决问题：前端 /progress 当前使用静态展示数据；后续可接入 /api/progress 做实时渲染
+- 下一步最佳动作：等待用户确认后，进入 feat-007 AI辅助Q&A系统，继续使用 mock AI
 
 

@@ -120,14 +120,14 @@
         "id":  "feat-010",
         "name":  "学习进度追踪",
         "priority":  3,
-        "status":  "not_started",
+        "status":  "completed",
         "description":  "用户学习进度统计、可视化展示",
         "verification_steps":  [
                                    "进度统计API工作正常",
                                    "前端可视化组件渲染正确",
                                    "进度数据实时更新验证"
                                ],
-        "last_verified":  null
+        "last_verified":  "2026-07-05T21:27:35+08:00"
     },
     {
         "id":  "feat-011",

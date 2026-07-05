@@ -106,3 +106,36 @@ def update_progress(day: int, status: str, user_output: str | None = None) -> di
             (day,),
         ).fetchone()
     return UserProgress.from_dict(dict(row)).to_dict()
+
+
+def get_progress_summary() -> dict[str, Any]:
+    seed_day_tasks()
+    with get_connection() as connection:
+        total_days = connection.execute("SELECT COUNT(*) FROM day_tasks").fetchone()[0]
+        rows = connection.execute(
+            """
+            SELECT id, day, status, user_output, completed_at
+            FROM user_progress
+            ORDER BY day ASC
+            """
+        ).fetchall()
+
+    progress_items = [UserProgress.from_dict(dict(row)).to_dict() for row in rows]
+    completed_days = [item for item in progress_items if item["status"] == "completed"]
+    in_progress_days = [item for item in progress_items if item["status"] == "in_progress"]
+    completion_rate = round((len(completed_days) / total_days) * 100, 1) if total_days else 0
+    current_day = max((item["day"] for item in progress_items), default=1)
+    latest_output = next(
+        (item["user_output"] for item in reversed(progress_items) if item.get("user_output")),
+        None,
+    )
+
+    return {
+        "totalDays": total_days,
+        "completedDays": len(completed_days),
+        "inProgressDays": len(in_progress_days),
+        "completionRate": completion_rate,
+        "currentDay": current_day,
+        "latestOutput": latest_output,
+        "items": progress_items,
+    }
