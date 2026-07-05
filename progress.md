@@ -69,5 +69,21 @@ ext dev --webpack，规避当前 Windows 环境下 Turbopack dev server 的 os e
 - 更新过的文件或工件：frontend/app/page.js, frontend/app/globals.css, progress.md
 - 已知风险或未解决问题：该实现按单张截图做视觉还原；没有 Figma 原始尺寸/字体 token，因此像素级误差需要后续基于更多标注继续校准
 - 下一步最佳动作：等待用户确认视觉效果后，再进入下一个功能步骤
+## Session 004
+- 日期：2026-07-05
+- 本轮目标：按用户反馈移除显示器外壳，只保留设计图中的应用内容
+- 已完成：
+  - 删除页面中的显示器边框、摄像头点、支架和外部线稿装饰
+  - 将截图中的内部应用 UI 放大为真实 Web 页面主体
+  - 保留 Sprint Track、AI Knowledge Hub、AI Career Sprint Hub 和底部工具栏的布局与玻璃质感
+- 运行过的验证：
+  - npm.cmd run lint：通过
+  - npm.cmd run build：通过
+  - Invoke-WebRequest http://localhost:2003：返回 200
+- 已记录证据：本节记录验证时间 2026-07-05T20:37:06+08:00
+- 提交记录：style: remove monitor frame from homepage design [verified]
+- 更新过的文件或工件：frontend/app/page.js, frontend/app/globals.css, progress.md
+- 已知风险或未解决问题：仍基于截图手工还原，后续如需像素级匹配需继续按用户视觉反馈校准
+- 下一步最佳动作：等待用户确认视觉效果后，再进入下一个功能步骤
 
 
