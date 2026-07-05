@@ -2,7 +2,8 @@ from typing import Any
 
 from database import get_connection
 from models import DailyContent
-from services.ai_service import generate_daily_content
+
+from .ai_service import generate_daily_content
 
 
 def _row_to_daily_content(row: Any) -> dict[str, Any]:
