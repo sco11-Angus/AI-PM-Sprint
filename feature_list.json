@@ -107,14 +107,14 @@
         "id":  "feat-009",
         "name":  "学习路径展示页面",
         "priority":  2,
-        "status":  "not_started",
+        "status":  "completed",
         "description":  "前端展示Day 1-30任务列表和详情",
         "verification_steps":  [
                                    "任务列表页面加载正常",
                                    "可查看单个任务详情",
                                    "与后端API集成测试通过"
                                ],
-        "last_verified":  null
+        "last_verified":  "2026-07-05T22:00:11+08:00"
     },
     {
         "id":  "feat-010",

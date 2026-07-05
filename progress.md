@@ -5,7 +5,7 @@
 - 仓库根目录：E:\VibeCoding
 - 标准启动路径：PowerShell 中执行 init.sh 内容；当前 Windows PowerShell 无法用 -File 直接执行 .sh 扩展名，且本机无 pwsh
 - 标准验证路径：后端导入检查、/api/health smoke test、init.sh 内容执行
-- 当前最高优先级未完成功能：feat-009 学习路径展示页面（priority 2）或 feat-011 部署与CI/CD（priority 5）；feat-003 用户认证不在 MVP 范围内
+- 当前最高优先级未完成功能：feat-011 部署与CI/CD（priority 5）；feat-003 用户认证不在 MVP 范围内
 - 当前 blocker：init.sh 文件内容是 PowerShell，但扩展名为 .sh；Windows PowerShell 不能直接 powershell -File .\init.sh
 
 ## Session 001
@@ -220,5 +220,29 @@ ext dev --webpack，规避当前 Windows 环境下 Turbopack dev server 的 os e
 - 更新过的文件或工件：.gitignore, backend/.env.example, backend/config.py, backend/main.py, backend/services/__init__.py, backend/services/model_service.py, feature_list.json, progress.md；backend/.env.local 为本地密钥文件，不提交
 - 已知风险或未解决问题：MiniMax 返回内容可能包含模型推理标记；后续如影响前端展示，可在响应层做清洗
 - 下一步最佳动作：等待用户确认后，进入 feat-009 学习路径展示页面或 MVP 收尾
+## Session 012
+- 日期：2026-07-05
+- 本轮目标：完成 feat-009 学习路径展示页面
+- 已完成：
+  - 新增 /learning-path 前端页面，沿用玻璃拟态风格展示 Day 1-30 列表和单日任务详情
+  - /learning-path 通过 NEXT_PUBLIC_API_BASE_URL 或默认 http://localhost:9000 调用后端 GET /api/tasks 和 GET /api/tasks/{day}
+  - 后端新增 CORS 配置，允许 http://localhost:2003 和 http://localhost:2000 调用 FastAPI
+  - 将 /day/7 静态页升级为动态 /day/[day]，支持任意 Day 页面跳转
+  - 首页和底部工具栏新增 Learning Path / Path 入口
+  - 启动后端预览服务 http://localhost:9000，供当前前端预览读取真实任务数据
+- 运行过的验证：
+  - 后端 TestClient GET /api/tasks 返回 200 且任务数为 30
+  - 后端 TestClient GET /api/tasks/12 返回 200 且 day=12
+  - CORS OPTIONS /api/tasks with Origin http://localhost:2003 返回 200 且 allow-origin 正确
+  - npm.cmd run lint：通过
+  - npm.cmd run build：通过，Next 生成 /learning-path 和动态 /day/[day]
+  - Invoke-WebRequest http://localhost:2003/learning-path 返回 200
+  - Invoke-WebRequest http://localhost:2003/day/8 返回 200
+  - 启动 FastAPI 预览后，Invoke-WebRequest http://localhost:9000/api/tasks 返回 200
+- 已记录证据：feature_list.json 中 feat-009 status=completed，last_verified=2026-07-05T22:00:11+08:00
+- 提交记录：feat: add learning path page integration [verified]
+- 更新过的文件或工件：backend/main.py, frontend/app/learning-path/page.js, frontend/app/day/[day]/page.js, frontend/app/day/7/page.js, frontend/app/components/sprint-shell.js, frontend/app/page.js, feature_list.json, progress.md
+- 已知风险或未解决问题：/learning-path 为客户端 fetch；如后端 9000 未启动，会显示错误状态。当前已启动 backend-preview-9000 供本地预览
+- 下一步最佳动作：等待用户确认后，进入 MVP 收尾或部署与 CI/CD
 
 

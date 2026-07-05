@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export const toolLinks = [
+  { icon: "▦", label: "Path", href: "/learning-path" },
   { icon: "✧", label: "AI Explain", href: "/ai-explain" },
   { icon: "□", label: "AI Ask", href: "/ai-ask" },
   { icon: "◇", label: "Project Build", href: "/project-build" },

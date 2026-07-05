@@ -1,6 +1,7 @@
 from typing import Literal
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from database import check_connection, initialize_database
@@ -17,6 +18,19 @@ from services import (
 )
 
 app = FastAPI(title="AI PM Sprint API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:2000",
+        "http://localhost:2003",
+        "http://127.0.0.1:2000",
+        "http://127.0.0.1:2003",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class ProgressUpdate(BaseModel):
