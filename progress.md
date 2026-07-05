@@ -5,7 +5,7 @@
 - 仓库根目录：E:\VibeCoding
 - 标准启动路径：PowerShell 中执行 init.sh 内容；当前 Windows PowerShell 无法用 -File 直接执行 .sh 扩展名，且本机无 pwsh
 - 标准验证路径：后端导入检查、/api/health smoke test、init.sh 内容执行
-- 当前最高优先级未完成功能：feat-003 用户认证系统（priority 3）或 feat-005 每日技术卡模块（priority 3），MVP 范围建议优先 feat-005
+- 当前最高优先级未完成功能：feat-006 前沿速递模块（priority 3），MVP 范围建议继续；feat-003 用户认证不在 MVP 范围内
 - 当前 blocker：init.sh 文件内容是 PowerShell，但扩展名为 .sh；Windows PowerShell 不能直接 powershell -File .\init.sh
 
 ## Session 001
@@ -140,5 +140,24 @@ ext dev --webpack，规避当前 Windows 环境下 Turbopack dev server 的 os e
 - 更新过的文件或工件：backend/main.py, backend/services/__init__.py, backend/services/task_service.py, feature_list.json, progress.md
 - 已知风险或未解决问题：任务内容目前是 MVP seed 数据，后续可替换为更细的 30 天正式课程内容
 - 下一步最佳动作：等待用户确认后，建议进入 feat-005 每日技术卡模块；feat-003 用户认证不在 PRD 的 MVP 范围内
+## Session 008
+- 日期：2026-07-05
+- 本轮目标：完成 feat-005 每日技术卡模块
+- 已完成：
+  - 新增 backend/services/ai_service.py，提供 mock 版 generate_tech_card(day) 和 generate_daily_content(day)
+  - 新增 backend/services/daily_content_service.py，支持 /api/daily/{day} 首次生成并写入 daily_content，后续直接读取已存数据
+  - 新增 GET /api/daily/{day}，返回 DailyContent，其中包含技术卡字段和 MVP 占位前沿字段
+- 运行过的验证：
+  - generate_tech_card(7) 返回 concept、oneLine、principle、example 结构
+  - GET /api/daily/7 返回 200，day=7，tech_concept=RAG
+  - 第二次 GET /api/daily/7 返回同一 id，证明已复用存储数据
+  - 技术卡字段 tech_one_line、tech_principle、tech_example 均非空
+  - GET /api/daily/31 返回 404
+  - init.sh 内容执行：通过
+- 已记录证据：feature_list.json 中 feat-005 status=completed，last_verified=2026-07-05T21:19:42+08:00
+- 提交记录：feat: add daily technical card API [verified]
+- 更新过的文件或工件：backend/main.py, backend/services/__init__.py, backend/services/ai_service.py, backend/services/daily_content_service.py, feature_list.json, progress.md
+- 已知风险或未解决问题：当前 AI 生成逻辑为 mock，未接 OpenAI；这是 MVP 内符合“不做复杂 AI 功能”的选择
+- 下一步最佳动作：等待用户确认后，进入 feat-006 前沿速递模块
 
 

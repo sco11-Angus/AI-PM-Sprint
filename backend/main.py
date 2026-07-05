@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from database import check_connection, initialize_database
-from services import get_task, list_tasks, update_progress
+from services import get_daily_content, get_task, list_tasks, update_progress
 
 app = FastAPI(title="AI PM Sprint API")
 
@@ -45,6 +45,13 @@ def get_task_by_day(day: int):
     if task is None:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
+
+
+@app.get("/api/daily/{day}")
+def get_daily_by_day(day: int):
+    if get_task(day) is None:
+        raise HTTPException(status_code=404, detail="Task not found")
+    return get_daily_content(day)
 
 
 @app.put("/api/progress/{day}")

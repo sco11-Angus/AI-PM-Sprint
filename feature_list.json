@@ -55,14 +55,14 @@
         "id":  "feat-005",
         "name":  "每日技术卡模块",
         "priority":  3,
-        "status":  "not_started",
+        "status":  "completed",
         "description":  "AI输入系统模块1：概念解释、原理、实操、输出",
         "verification_steps":  [
                                    "技术卡内容可正常获取",
                                    "与AI服务集成测试通过",
                                    "一句话讲解生成成功"
                                ],
-        "last_verified":  null
+        "last_verified":  "2026-07-05T21:19:42+08:00"
     },
     {
         "id":  "feat-006",
