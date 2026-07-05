@@ -16,14 +16,14 @@
         "id":  "feat-002",
         "name":  "数据模型设计",
         "priority":  2,
-        "status":  "not_started",
+        "status":  "completed",
         "description":  "用户、任务、学习进度等核心数据模型定义",
         "verification_steps":  [
                                    "数据模型定义完成",
                                    "数据库表结构创建",
                                    "模型对象序列化/反序列化测试通过"
                                ],
-        "last_verified":  null
+        "last_verified":  "2026-07-05T20:55:58+08:00"
     },
     {
         "id":  "feat-003",

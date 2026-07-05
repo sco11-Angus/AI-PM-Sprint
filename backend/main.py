@@ -1,8 +1,13 @@
 ﻿from fastapi import FastAPI
 
-from database import check_connection
+from database import check_connection, initialize_database
 
 app = FastAPI(title="AI PM Sprint API")
+
+
+@app.on_event("startup")
+def startup() -> None:
+    initialize_database()
 
 
 @app.get("/")
